@@ -7,8 +7,10 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using MyLeasing.Web.Data;
 
 namespace MyLeasing
 {
@@ -31,6 +33,13 @@ namespace MyLeasing
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            //se le dice al proyecto la conexion
+
+            services.AddDbContext<DataContext>(cfg =>
+            {
+                cfg.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));//se coencta a bases sql a la base defaul conection
+            });
+            services.AddTransient<SeedDb>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
