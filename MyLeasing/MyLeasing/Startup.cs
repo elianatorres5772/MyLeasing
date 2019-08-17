@@ -81,7 +81,7 @@ namespace MyLeasing
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
-                    name: "default",
+                    name: "Index",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
         }
