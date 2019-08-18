@@ -77,6 +77,9 @@ namespace MyLeasing.Web.Helpers
                 await _signInManager.SignOutAsync();
             }
 
-       
+        public Task AddUserToRoleAsync(User user, AddUserViewModel model)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

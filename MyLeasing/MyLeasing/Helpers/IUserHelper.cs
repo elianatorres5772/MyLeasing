@@ -24,8 +24,7 @@ namespace MyLeasing.Web.Helpers
        Task<SignInResult> LoginAsync(LoginViewModel model);
 
         Task LogoutAsync();
-
-
+        Task AddUserToRoleAsync(User user, AddUserViewModel model);
     }
 
 }
