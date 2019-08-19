@@ -23,6 +23,7 @@ namespace MyLeasing.Web.Controllers
         private readonly IImageHelper _imageHelper;
 
         public OwnersController(
+
             DataContext context,
             IUserHelper userHelper,
             ICombosHelper combosHelper,
