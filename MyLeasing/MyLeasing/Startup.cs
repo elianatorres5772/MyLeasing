@@ -55,7 +55,7 @@ namespace MyLeasing
 
             services.AddTransient<SeedDb>();
             services.AddScoped<IUserHelper, UserHelper>();//se esta creando una clase para inyectar esa clase user harper
-            services.AddScoped<ICombosHelper, CombosHelper>();
+         //   services.AddScoped<ICombosHelper, CombosHelper>();
             services.AddScoped<IConverterHelper, ConverterHelper>();
 
 
@@ -71,7 +71,7 @@ namespace MyLeasing
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");  
+                app.UseExceptionHandler("/Home/Error");
                 app.UseHsts();
             }
 

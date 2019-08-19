@@ -2,9 +2,9 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 using MyLeasing.Web.Data.Entities;
 
-namespace MyLeasing.Web.Helpers
+namespace MyLeasing
 {
-    public interface ICombosHelper
+    internal interface ICombosHelper
     {
         object ToPropertyViewModel(Property property);
         IEnumerable<SelectListItem> GetComboPropertyTypes();

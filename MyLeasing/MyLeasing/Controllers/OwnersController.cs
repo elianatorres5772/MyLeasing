@@ -18,18 +18,18 @@ namespace MyLeasing.Web.Controllers
     {
         private readonly DataContext _datacontext;
         private readonly IUserHelper _userHelper;
-        private readonly ICombosHelper _combosHelper;
+     //   private readonly ICombosHelper _combosHelper;
         private readonly IConverterHelper _converterHelper;
 
         public OwnersController(
-            DataContext context,
+            DataContext datacontext,
             IUserHelper userHelper,
-            ICombosHelper combosHelper,
+            //ICombosHelper combosHelper,
             IConverterHelper converterHelper)
         {
-            _datacontext = context;
+            _datacontext = datacontext;
             _userHelper = userHelper;
-            _combosHelper = combosHelper;
+          //  _combosHelper = combosHelper;
             _converterHelper = converterHelper;
         }
 
@@ -73,7 +73,7 @@ namespace MyLeasing.Web.Controllers
             return View();
         }
 
-       
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(AddUserViewModel model)
@@ -85,8 +85,8 @@ namespace MyLeasing.Web.Controllers
                 {
                     var owner = new Owner
                     {
-                        Contracts =new List<Contract>(),
-                        Properties =new List<Property>(),
+                        Contracts = new List<Contract>(),
+                        Properties = new List<Property>(),
                         User = user
                     };
 
@@ -236,7 +236,7 @@ namespace MyLeasing.Web.Controllers
             {
 
                 OwnerId = owner.Id,
-                PropertyTypes = _combosHelper.GetComboPropertyTypes()
+               // PropertyTypes = _combosHelper.GetComboPropertyTypes()
 
             };
 
@@ -260,6 +260,37 @@ namespace MyLeasing.Web.Controllers
             return View(model);
         }
 
-      
+
+
+        public async Task<IActionResult> EditProperty(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+
+            var property = await _datacontext.Properties
+                .Include(p => p.Owner)
+                .Include(p => p.PropertyType)
+                .FirstOrDefaultAsync(p => p.Id == id);
+
+
+            if (property == null)
+
+            {
+                return NotFound();
+            }
+
+            var model = ToPropertyViewModel(property);
+
+
+            return View(model);
+        }
+
+        private object ToPropertyViewModel(Property property)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
 using MyLeasing.Web.Data;
+using MyLeasing.Web.Data.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,6 +37,11 @@ namespace MyLeasing.Web.Helpers
                 Value = "0"
             }); ;
             return list;
+        }
+
+        public object ToPropertyViewModel(Property property)
+        {
+            throw new NotImplementedException();
         }
     }
 }
