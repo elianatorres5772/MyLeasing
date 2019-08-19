@@ -8,5 +8,6 @@ namespace MyLeasing.Web.Helpers
     {
         object ToPropertyViewModel(Property property);
         IEnumerable<SelectListItem> GetComboPropertyTypes();
+        IEnumerable<SelectListItem> GetComboLessees();
     }
 }

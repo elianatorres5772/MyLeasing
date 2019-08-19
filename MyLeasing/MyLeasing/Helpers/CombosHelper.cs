@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using MyLeasing.Web.Data;
 using MyLeasing.Web.Data.Entities;
 using System;
@@ -11,7 +12,7 @@ namespace MyLeasing.Web.Helpers
     public class CombosHelper : ICombosHelper
     {
         private DataContext _dataContext;
-
+            
         public CombosHelper(DataContext dataContext)
 
         {
@@ -36,6 +37,24 @@ namespace MyLeasing.Web.Helpers
                 Text = "(Select a property)",
                 Value = "0"
             }); ;
+            return list;
+        }
+
+       
+        public IEnumerable<SelectListItem> GetComboLessees()
+        {
+            var list = _dataContext.Lessees.Include(l => l.User).Select(p => new SelectListItem
+            {
+                Text = p.User.FullNameWithDocument,
+                Value = p.Id.ToString()
+            }).OrderBy(p => p.Text).ToList();
+
+            list.Insert(0, new SelectListItem
+            {
+                Text = "(Select a lessee...)",
+                Value = "0"
+            });
+
             return list;
         }
 
