@@ -18,13 +18,16 @@ namespace MyLeasing.Web.Controllers
     {
         private readonly DataContext _datacontext;
         private readonly IUserHelper _userHelper;
+        private readonly ICombosHelper _combosHelper;
 
         public OwnersController(
             DataContext context,
-            IUserHelper userHelper)
+            IUserHelper userHelper,
+            ICombosHelper combosHelper)
         {
             _datacontext = context;
             _userHelper = userHelper;
+            _combosHelper = combosHelper;
         }
 
         // GET: Owners
@@ -125,16 +128,6 @@ namespace MyLeasing.Web.Controllers
         }
 
 
-
-
-
-
-
-
-
-
-
-
         // GET: Owners/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -219,5 +212,34 @@ namespace MyLeasing.Web.Controllers
         {
             return _datacontext.Owners.Any(e => e.Id == id);
         }
+
+        public async Task<IActionResult> AddProperty(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+
+            var owner = await _datacontext.Owners.FindAsync(id);
+
+            if (owner == null)
+
+            {
+                return NotFound();
+            }
+
+            var model = new PropertyViewModel
+            {
+
+                OwnerId = owner.Id,
+                PropertyTypes = _combosHelper.GetComboPropertyTypes()
+
+            };
+
+            return View(model);
+        }
+
+       
     }
 }

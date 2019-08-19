@@ -54,7 +54,8 @@ namespace MyLeasing
             });
 
             services.AddTransient<SeedDb>();
-            services.AddScoped<IUserHelper, UserHelper>();//se esta creando una clase para inyectar esa clase user harper  
+            services.AddScoped<IUserHelper, UserHelper>();//se esta creando una clase para inyectar esa clase user harper
+            services.AddScoped<ICombosHelper, CombosHelper>();
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
