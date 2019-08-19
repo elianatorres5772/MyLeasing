@@ -26,7 +26,7 @@ namespace MyLeasing.Web.Helpers
                 Id = isNew ? 0 : model.Id,
                 IsAvailable = model.IsAvailable,
                 Neighborhood = model.Neighborhood,
-                Owner = await _dataContext.Owners.FindAsync(model.PropertyTypeId),
+                Owner = await _dataContext.Owners.FindAsync(model.OwnerId),
                 Price = model.Price,
                 PropertyImages = isNew ? new List<PropertyImage>() : model.PropertyImages,
                 PropertyType = await _dataContext.PropertyTypes.FindAsync(model.PropertyTypeId),
