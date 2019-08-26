@@ -295,6 +295,9 @@ namespace MyLeasing.Web.Controllers
             return View(model);
         }
 
+
+      
+
         [HttpPost]
         public async Task<IActionResult> EditProperty(PropertyViewModel model)
         {
@@ -539,8 +542,38 @@ namespace MyLeasing.Web.Controllers
             return RedirectToAction($"{nameof(Details)}/{property.Owner.Id}");
         }
 
+        public async Task<IActionResult> DetailsContract(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var contract = await _datacontext.Contracts
+                .Include(c => c.Owner)
+                .ThenInclude(o => o.User)
+                .Include(c => c.Lessee)
+                .ThenInclude(o => o.User)
+                .Include(c => c.Property)
+                .ThenInclude(p => p.PropertyType)
+                .FirstOrDefaultAsync(pi => pi.Id == id.Value);
+            if (contract == null)
+            {
+                return NotFound();
+            }
+
+            return View(contract);
+        }
 
 
     }
+
+
+
+
+
+
+
+
 
 }
