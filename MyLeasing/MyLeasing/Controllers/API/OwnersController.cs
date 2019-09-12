@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MyLeasing.Common.Models;
 using MyLeasing.Web.Data;
@@ -13,20 +15,21 @@ namespace MyLeasing.Web.Controllers.API
 
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class OwnersController : ControllerBase
     {
         private readonly DataContext _dataContext;
 
-        public OwnersController (DataContext dataContext )
+        public OwnersController(DataContext dataContext)
 
-            {
+        {
             _dataContext = dataContext;
         }
 
 
         [HttpPost]
-        [Route("GetOnwerByEmail")] 
-        
+        [Route("GetOnwerByEmail")]
+
 
 
         public async Task<IActionResult> GetOwnerByEmailAsync(EmailRequest request)

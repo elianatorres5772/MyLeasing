@@ -21,7 +21,7 @@ namespace MyLeasing.Web.Helpers
         Task<bool> IsUserInRoleAsync(User user, string roleName);
 
 
-       Task<SignInResult> LoginAsync(LoginViewModel model);
+        Task<SignInResult> LoginAsync(LoginViewModel model);
 
         Task LogoutAsync();
         Task AddUserToRoleAsync(User user, AddUserViewModel model);
@@ -29,6 +29,13 @@ namespace MyLeasing.Web.Helpers
         Task<bool> DeleteUserAsync(string email);
 
         Task<IdentityResult> UpdateUserAsync(User user);
+
+
+        Task<SignInResult> ValidatePasswordAsync(User user, string password);
+
+        // valida el password
+
+
     }
 
 }
